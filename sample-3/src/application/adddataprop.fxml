@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.datapropController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -20,12 +20,12 @@
         </Label>
             <Text layoutX="259.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Data Properies" />
             <Text layoutX="207.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Domain" />
-            <ComboBox layoutX="272.0" layoutY="122.0" prefWidth="150.0" />
+            <ComboBox fx:id="dataDomainList" layoutX="272.0" layoutY="122.0" onAction="#selectDomain" prefWidth="150.0" />
             <Text layoutX="212.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Range" />
             <ComboBox fx:id="ddrange" layoutX="272.0" layoutY="162.0" onAction="#rangedd" prefWidth="150.0" />
-            <TextField layoutX="272.0" layoutY="84.0" />
+            <TextField fx:id="dataPropertyName" layoutX="272.0" layoutY="84.0" />
             <Text layoutX="207.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-            <Button layoutX="309.0" layoutY="249.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="addDataPropertyButton" layoutX="309.0" layoutY="249.0" mnemonicParsing="false" onAction="#addDataProperty" text="Add" />
       </children>
     </AnchorPane>
   </children>

@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.OWLXMLOntologyFormat;
@@ -61,6 +62,21 @@ public class ontologyController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) { 
 		classList= FXCollections.observableArrayList("owlThing");
+		
+		try {
+            Scanner sc = new Scanner(new File("classlist.txt"));
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if(line.equals("owlThing"))
+                	continue;
+                classList.add(line.toString());
+ 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		
 		classes.setItems(classList);
 	}
 	
@@ -100,10 +116,9 @@ public class ontologyController implements Initializable {
 	void owlxx(String parent_class,String class_name) throws OWLOntologyCreationException{
 		// IRI IOR = IRI.create("http://owl.api.tutorial");
 		
-		
 		IRI IOR = IRI.create("http://owl.api.tutorial");
 		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
-		OWLOntology o = man.createOntology(IOR);
+		 OWLOntology o = man.loadOntologyFromOntologyDocument(new File("C:\\Users\\kagal\\Desktop\\s11.owl"));
 		OWLDataFactory df = o.getOWLOntologyManager().getOWLDataFactory();
 //		 OWLClass student = df.getOWLClass(IOR+"#Student");
 //		 // There is a class called Student.

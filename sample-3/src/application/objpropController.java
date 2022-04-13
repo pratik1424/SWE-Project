@@ -2,6 +2,8 @@ package application;
 
 import java.awt.List;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -10,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.OWLXMLOntologyFormat;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -20,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import com.google.common.io.Files;
 
@@ -110,7 +114,7 @@ public class objpropController implements Initializable {
     	OWLObjectProperty h = df.getOWLObjectProperty(IOR+"#"+obj_property_name);
     	OWLDeclarationAxiom da21 = df.getOWLDeclarationAxiom(h);
     	o.add(da21);
-    	// has has a domain of gradeInCourse and a range of courses.
+    	
     	
     	OWLClass domain_name = df.getOWLClass(IOR+"#"+domainClass);
     	
@@ -119,6 +123,24 @@ public class objpropController implements Initializable {
     	o.add(dp12);
     	OWLObjectPropertyRangeAxiom dr12 = df.getOWLObjectPropertyRangeAxiom(h, range_name);
     	o.add(dr12);
+    	
+    	OWLXMLOntologyFormat format = new OWLXMLOntologyFormat();
+    	 FileOutputStream fos = null;
+		 try {
+		 fos = new FileOutputStream(new File("C:\\Users\\kagal\\Desktop\\s11.owl"));
+		 } catch (FileNotFoundException e) {
+		 e.printStackTrace();
+		 }
+		 try {
+		 o.saveOntology(format, fos);
+		 } catch (OWLOntologyStorageException e) {
+		 e.printStackTrace();
+		 }
+		 try {
+		 fos.close();
+		 } catch (IOException e) {
+		 e.printStackTrace();
+		 }
     	
     	//System.out.print("pk");
     }
